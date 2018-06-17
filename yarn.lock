@@ -2283,6 +2283,10 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
+dinero.js@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/dinero.js/-/dinero.js-1.4.0.tgz#53614ec343e3b2325fca10e658975697b1f3cfa6"
+
 dlv@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.1.tgz#c79d96bfe659a5568001250ed2aaf653992bdd3f"
@@ -2759,6 +2763,12 @@ eslint-plugin-jsx-a11y@^6.0.3:
 eslint-plugin-meteor@^4.0.1:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-meteor/-/eslint-plugin-meteor-4.2.2.tgz#8620b0c3764dda33accb8a32ae19a096134b4d81"
+  dependencies:
+    invariant "2.2.4"
+
+eslint-plugin-meteor@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-meteor/-/eslint-plugin-meteor-5.0.0.tgz#869ab023b2b524dfad667e94b704bf4006993b7a"
   dependencies:
     invariant "2.2.4"
 

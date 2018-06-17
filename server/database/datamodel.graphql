@@ -7,11 +7,54 @@ type Post {
   text: String!
   author: User!
 }
-
 type User {
   id: ID! @unique
   email: String! @unique
   password: String!
   name: String!
-  posts: [Post!]!
+  sheets: [Sheet!]! @relation(name: "UserSheet")
+}
+
+type Sheet {
+  id: ID! @unique
+  key: ID @unique
+  installments : [InstallmentEntry!]! @relation(name: "InstallmentSheet", onDelete: CASCADE)
+  entries : [Entry!]! @relation(name: "EntrySheet", onDelete: CASCADE)
+  accounts : [Account!]! @relation(name: "AccountSheet", onDelete: CASCADE)
+  users: [User!]! @relation(name: "UserSheet")
+}
+
+type InstallmentEntry {
+  id: ID! @unique
+  key: ID @unique
+  value: Json!
+  account: Account!
+  sheet: Sheet! @relation(name: "InstallmentSheet")
+}
+type Entry {
+  id: ID! @unique
+  key: ID @unique
+  value: Json!
+  budget: Boolean! @default(value: "false")
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  title: String!
+  text: String
+  author: User!
+  account: Account!
+  recurring: Boolean! @default(value: "false")
+  paidDate: DateTime
+  dueDate: DateTime
+  sheet: Sheet! @relation(name: "EntrySheet")
+}
+type Account {
+  id: ID! @unique
+  key: ID @unique
+  balance: Json!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  creditCard: Boolean! @default(value: "false")
+  receiveAccount: Boolean! @default(value: "false")
+  title: String!
+  sheet: Sheet! @relation(name:"AccountSheet")
 }

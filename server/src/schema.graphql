@@ -1,4 +1,8 @@
 # import Post from "./generated/prisma.graphql"
+# import Sheet from "./generated/prisma.graphql"
+# import InstallmentEntry from "./generated/prisma.graphql"
+# import Entry from "./generated/prisma.graphql"
+# import Account from "./generated/prisma.graphql"
 
 type Query {
   feed: [Post!]!
@@ -28,5 +32,5 @@ type User {
   id: ID!
   email: String!
   name: String!
-  posts: [Post!]!
+  sheets: [Sheet!]!
 }

@@ -1,7 +1,398 @@
 # source: https://us1.prisma.sh/public-neonbell-476/financeme/dev
-# timestamp: Sat Jun 16 2018 13:50:15 GMT-0300 (Brasilia Standard Time)
+# timestamp: Sat Jun 16 2018 22:50:23 GMT-0300 (Brasilia Standard Time)
+
+type Account implements Node {
+  id: ID!
+  key: ID
+  balance: Json!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  creditCard: Boolean!
+  receiveAccount: Boolean!
+  title: String!
+  sheet(where: SheetWhereInput): Sheet!
+}
+
+"""A connection to a list of items."""
+type AccountConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AccountEdge]!
+  aggregate: AggregateAccount!
+}
+
+input AccountCreateInput {
+  key: ID
+  balance: Json!
+  creditCard: Boolean
+  receiveAccount: Boolean
+  title: String!
+  sheet: SheetCreateOneWithoutAccountsInput!
+}
+
+input AccountCreateManyWithoutSheetInput {
+  create: [AccountCreateWithoutSheetInput!]
+  connect: [AccountWhereUniqueInput!]
+}
+
+input AccountCreateOneInput {
+  create: AccountCreateInput
+  connect: AccountWhereUniqueInput
+}
+
+input AccountCreateWithoutSheetInput {
+  key: ID
+  balance: Json!
+  creditCard: Boolean
+  receiveAccount: Boolean
+  title: String!
+}
+
+"""An edge in a connection."""
+type AccountEdge {
+  """The item at the end of the edge."""
+  node: Account!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AccountOrderByInput {
+  id_ASC
+  id_DESC
+  key_ASC
+  key_DESC
+  balance_ASC
+  balance_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+  creditCard_ASC
+  creditCard_DESC
+  receiveAccount_ASC
+  receiveAccount_DESC
+  title_ASC
+  title_DESC
+}
+
+type AccountPreviousValues {
+  id: ID!
+  key: ID
+  balance: Json!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  creditCard: Boolean!
+  receiveAccount: Boolean!
+  title: String!
+}
+
+type AccountSubscriptionPayload {
+  mutation: MutationType!
+  node: Account
+  updatedFields: [String!]
+  previousValues: AccountPreviousValues
+}
+
+input AccountSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AccountSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AccountSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AccountSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AccountWhereInput
+}
+
+input AccountUpdateDataInput {
+  key: ID
+  balance: Json
+  creditCard: Boolean
+  receiveAccount: Boolean
+  title: String
+  sheet: SheetUpdateOneWithoutAccountsInput
+}
+
+input AccountUpdateInput {
+  key: ID
+  balance: Json
+  creditCard: Boolean
+  receiveAccount: Boolean
+  title: String
+  sheet: SheetUpdateOneWithoutAccountsInput
+}
+
+input AccountUpdateManyWithoutSheetInput {
+  create: [AccountCreateWithoutSheetInput!]
+  connect: [AccountWhereUniqueInput!]
+  disconnect: [AccountWhereUniqueInput!]
+  delete: [AccountWhereUniqueInput!]
+  update: [AccountUpdateWithWhereUniqueWithoutSheetInput!]
+  upsert: [AccountUpsertWithWhereUniqueWithoutSheetInput!]
+}
+
+input AccountUpdateOneInput {
+  create: AccountCreateInput
+  connect: AccountWhereUniqueInput
+  delete: Boolean
+  update: AccountUpdateDataInput
+  upsert: AccountUpsertNestedInput
+}
+
+input AccountUpdateWithoutSheetDataInput {
+  key: ID
+  balance: Json
+  creditCard: Boolean
+  receiveAccount: Boolean
+  title: String
+}
+
+input AccountUpdateWithWhereUniqueWithoutSheetInput {
+  where: AccountWhereUniqueInput!
+  data: AccountUpdateWithoutSheetDataInput!
+}
+
+input AccountUpsertNestedInput {
+  update: AccountUpdateDataInput!
+  create: AccountCreateInput!
+}
+
+input AccountUpsertWithWhereUniqueWithoutSheetInput {
+  where: AccountWhereUniqueInput!
+  update: AccountUpdateWithoutSheetDataInput!
+  create: AccountCreateWithoutSheetInput!
+}
+
+input AccountWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AccountWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AccountWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AccountWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  key: ID
+
+  """All values that are not equal to given value."""
+  key_not: ID
+
+  """All values that are contained in given list."""
+  key_in: [ID!]
+
+  """All values that are not contained in given list."""
+  key_not_in: [ID!]
+
+  """All values less than the given value."""
+  key_lt: ID
+
+  """All values less than or equal the given value."""
+  key_lte: ID
+
+  """All values greater than the given value."""
+  key_gt: ID
+
+  """All values greater than or equal the given value."""
+  key_gte: ID
+
+  """All values containing the given string."""
+  key_contains: ID
+
+  """All values not containing the given string."""
+  key_not_contains: ID
+
+  """All values starting with the given string."""
+  key_starts_with: ID
+
+  """All values not starting with the given string."""
+  key_not_starts_with: ID
+
+  """All values ending with the given string."""
+  key_ends_with: ID
+
+  """All values not ending with the given string."""
+  key_not_ends_with: ID
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  creditCard: Boolean
+
+  """All values that are not equal to given value."""
+  creditCard_not: Boolean
+  receiveAccount: Boolean
+
+  """All values that are not equal to given value."""
+  receiveAccount_not: Boolean
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  sheet: SheetWhereInput
+}
+
+input AccountWhereUniqueInput {
+  id: ID
+  key: ID
+}
+
+type AggregateAccount {
+  count: Int!
+}
+
+type AggregateEntry {
+  count: Int!
+}
+
+type AggregateInstallmentEntry {
+  count: Int!
+}
 
 type AggregatePost {
+  count: Int!
+}
+
+type AggregateSheet {
   count: Int!
 }
 
@@ -16,6 +407,711 @@ type BatchPayload {
 
 scalar DateTime
 
+type Entry implements Node {
+  id: ID!
+  key: ID
+  value: Json!
+  budget: Boolean!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  title: String!
+  text: String
+  author(where: UserWhereInput): User!
+  account(where: AccountWhereInput): Account!
+  recurring: Boolean!
+  paidDate: DateTime
+  dueDate: DateTime
+  sheet(where: SheetWhereInput): Sheet!
+}
+
+"""A connection to a list of items."""
+type EntryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [EntryEdge]!
+  aggregate: AggregateEntry!
+}
+
+input EntryCreateInput {
+  key: ID
+  value: Json!
+  budget: Boolean
+  title: String!
+  text: String
+  recurring: Boolean
+  paidDate: DateTime
+  dueDate: DateTime
+  author: UserCreateOneInput!
+  account: AccountCreateOneInput!
+  sheet: SheetCreateOneWithoutEntriesInput!
+}
+
+input EntryCreateManyWithoutSheetInput {
+  create: [EntryCreateWithoutSheetInput!]
+  connect: [EntryWhereUniqueInput!]
+}
+
+input EntryCreateWithoutSheetInput {
+  key: ID
+  value: Json!
+  budget: Boolean
+  title: String!
+  text: String
+  recurring: Boolean
+  paidDate: DateTime
+  dueDate: DateTime
+  author: UserCreateOneInput!
+  account: AccountCreateOneInput!
+}
+
+"""An edge in a connection."""
+type EntryEdge {
+  """The item at the end of the edge."""
+  node: Entry!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum EntryOrderByInput {
+  id_ASC
+  id_DESC
+  key_ASC
+  key_DESC
+  value_ASC
+  value_DESC
+  budget_ASC
+  budget_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+  title_ASC
+  title_DESC
+  text_ASC
+  text_DESC
+  recurring_ASC
+  recurring_DESC
+  paidDate_ASC
+  paidDate_DESC
+  dueDate_ASC
+  dueDate_DESC
+}
+
+type EntryPreviousValues {
+  id: ID!
+  key: ID
+  value: Json!
+  budget: Boolean!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  title: String!
+  text: String
+  recurring: Boolean!
+  paidDate: DateTime
+  dueDate: DateTime
+}
+
+type EntrySubscriptionPayload {
+  mutation: MutationType!
+  node: Entry
+  updatedFields: [String!]
+  previousValues: EntryPreviousValues
+}
+
+input EntrySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [EntrySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [EntrySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [EntrySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: EntryWhereInput
+}
+
+input EntryUpdateInput {
+  key: ID
+  value: Json
+  budget: Boolean
+  title: String
+  text: String
+  recurring: Boolean
+  paidDate: DateTime
+  dueDate: DateTime
+  author: UserUpdateOneInput
+  account: AccountUpdateOneInput
+  sheet: SheetUpdateOneWithoutEntriesInput
+}
+
+input EntryUpdateManyWithoutSheetInput {
+  create: [EntryCreateWithoutSheetInput!]
+  connect: [EntryWhereUniqueInput!]
+  disconnect: [EntryWhereUniqueInput!]
+  delete: [EntryWhereUniqueInput!]
+  update: [EntryUpdateWithWhereUniqueWithoutSheetInput!]
+  upsert: [EntryUpsertWithWhereUniqueWithoutSheetInput!]
+}
+
+input EntryUpdateWithoutSheetDataInput {
+  key: ID
+  value: Json
+  budget: Boolean
+  title: String
+  text: String
+  recurring: Boolean
+  paidDate: DateTime
+  dueDate: DateTime
+  author: UserUpdateOneInput
+  account: AccountUpdateOneInput
+}
+
+input EntryUpdateWithWhereUniqueWithoutSheetInput {
+  where: EntryWhereUniqueInput!
+  data: EntryUpdateWithoutSheetDataInput!
+}
+
+input EntryUpsertWithWhereUniqueWithoutSheetInput {
+  where: EntryWhereUniqueInput!
+  update: EntryUpdateWithoutSheetDataInput!
+  create: EntryCreateWithoutSheetInput!
+}
+
+input EntryWhereInput {
+  """Logical AND on all given filters."""
+  AND: [EntryWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [EntryWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [EntryWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  key: ID
+
+  """All values that are not equal to given value."""
+  key_not: ID
+
+  """All values that are contained in given list."""
+  key_in: [ID!]
+
+  """All values that are not contained in given list."""
+  key_not_in: [ID!]
+
+  """All values less than the given value."""
+  key_lt: ID
+
+  """All values less than or equal the given value."""
+  key_lte: ID
+
+  """All values greater than the given value."""
+  key_gt: ID
+
+  """All values greater than or equal the given value."""
+  key_gte: ID
+
+  """All values containing the given string."""
+  key_contains: ID
+
+  """All values not containing the given string."""
+  key_not_contains: ID
+
+  """All values starting with the given string."""
+  key_starts_with: ID
+
+  """All values not starting with the given string."""
+  key_not_starts_with: ID
+
+  """All values ending with the given string."""
+  key_ends_with: ID
+
+  """All values not ending with the given string."""
+  key_not_ends_with: ID
+  budget: Boolean
+
+  """All values that are not equal to given value."""
+  budget_not: Boolean
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  recurring: Boolean
+
+  """All values that are not equal to given value."""
+  recurring_not: Boolean
+  paidDate: DateTime
+
+  """All values that are not equal to given value."""
+  paidDate_not: DateTime
+
+  """All values that are contained in given list."""
+  paidDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  paidDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  paidDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  paidDate_lte: DateTime
+
+  """All values greater than the given value."""
+  paidDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  paidDate_gte: DateTime
+  dueDate: DateTime
+
+  """All values that are not equal to given value."""
+  dueDate_not: DateTime
+
+  """All values that are contained in given list."""
+  dueDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  dueDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  dueDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  dueDate_lte: DateTime
+
+  """All values greater than the given value."""
+  dueDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  dueDate_gte: DateTime
+  author: UserWhereInput
+  account: AccountWhereInput
+  sheet: SheetWhereInput
+}
+
+input EntryWhereUniqueInput {
+  id: ID
+  key: ID
+}
+
+type InstallmentEntry implements Node {
+  id: ID!
+  key: ID
+  value: Json!
+  account(where: AccountWhereInput): Account!
+  sheet(where: SheetWhereInput): Sheet!
+}
+
+"""A connection to a list of items."""
+type InstallmentEntryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [InstallmentEntryEdge]!
+  aggregate: AggregateInstallmentEntry!
+}
+
+input InstallmentEntryCreateInput {
+  key: ID
+  value: Json!
+  account: AccountCreateOneInput!
+  sheet: SheetCreateOneWithoutInstallmentsInput!
+}
+
+input InstallmentEntryCreateManyWithoutSheetInput {
+  create: [InstallmentEntryCreateWithoutSheetInput!]
+  connect: [InstallmentEntryWhereUniqueInput!]
+}
+
+input InstallmentEntryCreateWithoutSheetInput {
+  key: ID
+  value: Json!
+  account: AccountCreateOneInput!
+}
+
+"""An edge in a connection."""
+type InstallmentEntryEdge {
+  """The item at the end of the edge."""
+  node: InstallmentEntry!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum InstallmentEntryOrderByInput {
+  id_ASC
+  id_DESC
+  key_ASC
+  key_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type InstallmentEntryPreviousValues {
+  id: ID!
+  key: ID
+  value: Json!
+}
+
+type InstallmentEntrySubscriptionPayload {
+  mutation: MutationType!
+  node: InstallmentEntry
+  updatedFields: [String!]
+  previousValues: InstallmentEntryPreviousValues
+}
+
+input InstallmentEntrySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [InstallmentEntrySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [InstallmentEntrySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [InstallmentEntrySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: InstallmentEntryWhereInput
+}
+
+input InstallmentEntryUpdateInput {
+  key: ID
+  value: Json
+  account: AccountUpdateOneInput
+  sheet: SheetUpdateOneWithoutInstallmentsInput
+}
+
+input InstallmentEntryUpdateManyWithoutSheetInput {
+  create: [InstallmentEntryCreateWithoutSheetInput!]
+  connect: [InstallmentEntryWhereUniqueInput!]
+  disconnect: [InstallmentEntryWhereUniqueInput!]
+  delete: [InstallmentEntryWhereUniqueInput!]
+  update: [InstallmentEntryUpdateWithWhereUniqueWithoutSheetInput!]
+  upsert: [InstallmentEntryUpsertWithWhereUniqueWithoutSheetInput!]
+}
+
+input InstallmentEntryUpdateWithoutSheetDataInput {
+  key: ID
+  value: Json
+  account: AccountUpdateOneInput
+}
+
+input InstallmentEntryUpdateWithWhereUniqueWithoutSheetInput {
+  where: InstallmentEntryWhereUniqueInput!
+  data: InstallmentEntryUpdateWithoutSheetDataInput!
+}
+
+input InstallmentEntryUpsertWithWhereUniqueWithoutSheetInput {
+  where: InstallmentEntryWhereUniqueInput!
+  update: InstallmentEntryUpdateWithoutSheetDataInput!
+  create: InstallmentEntryCreateWithoutSheetInput!
+}
+
+input InstallmentEntryWhereInput {
+  """Logical AND on all given filters."""
+  AND: [InstallmentEntryWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [InstallmentEntryWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [InstallmentEntryWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  key: ID
+
+  """All values that are not equal to given value."""
+  key_not: ID
+
+  """All values that are contained in given list."""
+  key_in: [ID!]
+
+  """All values that are not contained in given list."""
+  key_not_in: [ID!]
+
+  """All values less than the given value."""
+  key_lt: ID
+
+  """All values less than or equal the given value."""
+  key_lte: ID
+
+  """All values greater than the given value."""
+  key_gt: ID
+
+  """All values greater than or equal the given value."""
+  key_gte: ID
+
+  """All values containing the given string."""
+  key_contains: ID
+
+  """All values not containing the given string."""
+  key_not_contains: ID
+
+  """All values starting with the given string."""
+  key_starts_with: ID
+
+  """All values not starting with the given string."""
+  key_not_starts_with: ID
+
+  """All values ending with the given string."""
+  key_ends_with: ID
+
+  """All values not ending with the given string."""
+  key_not_ends_with: ID
+  account: AccountWhereInput
+  sheet: SheetWhereInput
+}
+
+input InstallmentEntryWhereUniqueInput {
+  id: ID
+  key: ID
+}
+
+"""Raw JSON value"""
+scalar Json
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -25,16 +1121,40 @@ scalar Long
 type Mutation {
   createPost(data: PostCreateInput!): Post!
   createUser(data: UserCreateInput!): User!
+  createSheet(data: SheetCreateInput!): Sheet!
+  createInstallmentEntry(data: InstallmentEntryCreateInput!): InstallmentEntry!
+  createEntry(data: EntryCreateInput!): Entry!
+  createAccount(data: AccountCreateInput!): Account!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateSheet(data: SheetUpdateInput!, where: SheetWhereUniqueInput!): Sheet
+  updateInstallmentEntry(data: InstallmentEntryUpdateInput!, where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
+  updateEntry(data: EntryUpdateInput!, where: EntryWhereUniqueInput!): Entry
+  updateAccount(data: AccountUpdateInput!, where: AccountWhereUniqueInput!): Account
   deletePost(where: PostWhereUniqueInput!): Post
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteSheet(where: SheetWhereUniqueInput!): Sheet
+  deleteInstallmentEntry(where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
+  deleteEntry(where: EntryWhereUniqueInput!): Entry
+  deleteAccount(where: AccountWhereUniqueInput!): Account
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertSheet(where: SheetWhereUniqueInput!, create: SheetCreateInput!, update: SheetUpdateInput!): Sheet!
+  upsertInstallmentEntry(where: InstallmentEntryWhereUniqueInput!, create: InstallmentEntryCreateInput!, update: InstallmentEntryUpdateInput!): InstallmentEntry!
+  upsertEntry(where: EntryWhereUniqueInput!, create: EntryCreateInput!, update: EntryUpdateInput!): Entry!
+  upsertAccount(where: AccountWhereUniqueInput!, create: AccountCreateInput!, update: AccountUpdateInput!): Account!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManySheets(data: SheetUpdateInput!, where: SheetWhereInput): BatchPayload!
+  updateManyInstallmentEntries(data: InstallmentEntryUpdateInput!, where: InstallmentEntryWhereInput): BatchPayload!
+  updateManyEntries(data: EntryUpdateInput!, where: EntryWhereInput): BatchPayload!
+  updateManyAccounts(data: AccountUpdateInput!, where: AccountWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManySheets(where: SheetWhereInput): BatchPayload!
+  deleteManyInstallmentEntries(where: InstallmentEntryWhereInput): BatchPayload!
+  deleteManyEntries(where: EntryWhereInput): BatchPayload!
+  deleteManyAccounts(where: AccountWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -88,18 +1208,7 @@ input PostCreateInput {
   isPublished: Boolean
   title: String!
   text: String!
-  author: UserCreateOneWithoutPostsInput!
-}
-
-input PostCreateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  isPublished: Boolean
-  title: String!
-  text: String!
+  author: UserCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -178,33 +1287,7 @@ input PostUpdateInput {
   isPublished: Boolean
   title: String
   text: String
-  author: UserUpdateOneWithoutPostsInput
-}
-
-input PostUpdateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-  disconnect: [PostWhereUniqueInput!]
-  delete: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input PostUpdateWithoutAuthorDataInput {
-  isPublished: Boolean
-  title: String
-  text: String
-}
-
-input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  data: PostUpdateWithoutAuthorDataInput!
-}
-
-input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  update: PostUpdateWithoutAuthorDataInput!
-  create: PostCreateWithoutAuthorInput!
+  author: UserUpdateOneInput
 }
 
 input PostWhereInput {
@@ -394,10 +1477,22 @@ input PostWhereUniqueInput {
 type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  sheets(where: SheetWhereInput, orderBy: SheetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sheet]!
+  installmentEntries(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [InstallmentEntry]!
+  entries(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Entry]!
+  accounts(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Account]!
   post(where: PostWhereUniqueInput!): Post
   user(where: UserWhereUniqueInput!): User
+  sheet(where: SheetWhereUniqueInput!): Sheet
+  installmentEntry(where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
+  entry(where: EntryWhereUniqueInput!): Entry
+  account(where: AccountWhereUniqueInput!): Account
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  sheetsConnection(where: SheetWhereInput, orderBy: SheetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SheetConnection!
+  installmentEntriesConnection(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InstallmentEntryConnection!
+  entriesConnection(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EntryConnection!
+  accountsConnection(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccountConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -406,9 +1501,355 @@ type Query {
   ): Node
 }
 
+type Sheet implements Node {
+  id: ID!
+  key: ID
+  installments(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [InstallmentEntry!]
+  entries(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Entry!]
+  accounts(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Account!]
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+}
+
+"""A connection to a list of items."""
+type SheetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SheetEdge]!
+  aggregate: AggregateSheet!
+}
+
+input SheetCreateInput {
+  key: ID
+  installments: InstallmentEntryCreateManyWithoutSheetInput
+  entries: EntryCreateManyWithoutSheetInput
+  accounts: AccountCreateManyWithoutSheetInput
+  users: UserCreateManyWithoutSheetsInput
+}
+
+input SheetCreateManyWithoutUsersInput {
+  create: [SheetCreateWithoutUsersInput!]
+  connect: [SheetWhereUniqueInput!]
+}
+
+input SheetCreateOneWithoutAccountsInput {
+  create: SheetCreateWithoutAccountsInput
+  connect: SheetWhereUniqueInput
+}
+
+input SheetCreateOneWithoutEntriesInput {
+  create: SheetCreateWithoutEntriesInput
+  connect: SheetWhereUniqueInput
+}
+
+input SheetCreateOneWithoutInstallmentsInput {
+  create: SheetCreateWithoutInstallmentsInput
+  connect: SheetWhereUniqueInput
+}
+
+input SheetCreateWithoutAccountsInput {
+  key: ID
+  installments: InstallmentEntryCreateManyWithoutSheetInput
+  entries: EntryCreateManyWithoutSheetInput
+  users: UserCreateManyWithoutSheetsInput
+}
+
+input SheetCreateWithoutEntriesInput {
+  key: ID
+  installments: InstallmentEntryCreateManyWithoutSheetInput
+  accounts: AccountCreateManyWithoutSheetInput
+  users: UserCreateManyWithoutSheetsInput
+}
+
+input SheetCreateWithoutInstallmentsInput {
+  key: ID
+  entries: EntryCreateManyWithoutSheetInput
+  accounts: AccountCreateManyWithoutSheetInput
+  users: UserCreateManyWithoutSheetsInput
+}
+
+input SheetCreateWithoutUsersInput {
+  key: ID
+  installments: InstallmentEntryCreateManyWithoutSheetInput
+  entries: EntryCreateManyWithoutSheetInput
+  accounts: AccountCreateManyWithoutSheetInput
+}
+
+"""An edge in a connection."""
+type SheetEdge {
+  """The item at the end of the edge."""
+  node: Sheet!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SheetOrderByInput {
+  id_ASC
+  id_DESC
+  key_ASC
+  key_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SheetPreviousValues {
+  id: ID!
+  key: ID
+}
+
+type SheetSubscriptionPayload {
+  mutation: MutationType!
+  node: Sheet
+  updatedFields: [String!]
+  previousValues: SheetPreviousValues
+}
+
+input SheetSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SheetSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SheetSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SheetSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SheetWhereInput
+}
+
+input SheetUpdateInput {
+  key: ID
+  installments: InstallmentEntryUpdateManyWithoutSheetInput
+  entries: EntryUpdateManyWithoutSheetInput
+  accounts: AccountUpdateManyWithoutSheetInput
+  users: UserUpdateManyWithoutSheetsInput
+}
+
+input SheetUpdateManyWithoutUsersInput {
+  create: [SheetCreateWithoutUsersInput!]
+  connect: [SheetWhereUniqueInput!]
+  disconnect: [SheetWhereUniqueInput!]
+  delete: [SheetWhereUniqueInput!]
+  update: [SheetUpdateWithWhereUniqueWithoutUsersInput!]
+  upsert: [SheetUpsertWithWhereUniqueWithoutUsersInput!]
+}
+
+input SheetUpdateOneWithoutAccountsInput {
+  create: SheetCreateWithoutAccountsInput
+  connect: SheetWhereUniqueInput
+  delete: Boolean
+  update: SheetUpdateWithoutAccountsDataInput
+  upsert: SheetUpsertWithoutAccountsInput
+}
+
+input SheetUpdateOneWithoutEntriesInput {
+  create: SheetCreateWithoutEntriesInput
+  connect: SheetWhereUniqueInput
+  delete: Boolean
+  update: SheetUpdateWithoutEntriesDataInput
+  upsert: SheetUpsertWithoutEntriesInput
+}
+
+input SheetUpdateOneWithoutInstallmentsInput {
+  create: SheetCreateWithoutInstallmentsInput
+  connect: SheetWhereUniqueInput
+  delete: Boolean
+  update: SheetUpdateWithoutInstallmentsDataInput
+  upsert: SheetUpsertWithoutInstallmentsInput
+}
+
+input SheetUpdateWithoutAccountsDataInput {
+  key: ID
+  installments: InstallmentEntryUpdateManyWithoutSheetInput
+  entries: EntryUpdateManyWithoutSheetInput
+  users: UserUpdateManyWithoutSheetsInput
+}
+
+input SheetUpdateWithoutEntriesDataInput {
+  key: ID
+  installments: InstallmentEntryUpdateManyWithoutSheetInput
+  accounts: AccountUpdateManyWithoutSheetInput
+  users: UserUpdateManyWithoutSheetsInput
+}
+
+input SheetUpdateWithoutInstallmentsDataInput {
+  key: ID
+  entries: EntryUpdateManyWithoutSheetInput
+  accounts: AccountUpdateManyWithoutSheetInput
+  users: UserUpdateManyWithoutSheetsInput
+}
+
+input SheetUpdateWithoutUsersDataInput {
+  key: ID
+  installments: InstallmentEntryUpdateManyWithoutSheetInput
+  entries: EntryUpdateManyWithoutSheetInput
+  accounts: AccountUpdateManyWithoutSheetInput
+}
+
+input SheetUpdateWithWhereUniqueWithoutUsersInput {
+  where: SheetWhereUniqueInput!
+  data: SheetUpdateWithoutUsersDataInput!
+}
+
+input SheetUpsertWithoutAccountsInput {
+  update: SheetUpdateWithoutAccountsDataInput!
+  create: SheetCreateWithoutAccountsInput!
+}
+
+input SheetUpsertWithoutEntriesInput {
+  update: SheetUpdateWithoutEntriesDataInput!
+  create: SheetCreateWithoutEntriesInput!
+}
+
+input SheetUpsertWithoutInstallmentsInput {
+  update: SheetUpdateWithoutInstallmentsDataInput!
+  create: SheetCreateWithoutInstallmentsInput!
+}
+
+input SheetUpsertWithWhereUniqueWithoutUsersInput {
+  where: SheetWhereUniqueInput!
+  update: SheetUpdateWithoutUsersDataInput!
+  create: SheetCreateWithoutUsersInput!
+}
+
+input SheetWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SheetWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SheetWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SheetWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  key: ID
+
+  """All values that are not equal to given value."""
+  key_not: ID
+
+  """All values that are contained in given list."""
+  key_in: [ID!]
+
+  """All values that are not contained in given list."""
+  key_not_in: [ID!]
+
+  """All values less than the given value."""
+  key_lt: ID
+
+  """All values less than or equal the given value."""
+  key_lte: ID
+
+  """All values greater than the given value."""
+  key_gt: ID
+
+  """All values greater than or equal the given value."""
+  key_gte: ID
+
+  """All values containing the given string."""
+  key_contains: ID
+
+  """All values not containing the given string."""
+  key_not_contains: ID
+
+  """All values starting with the given string."""
+  key_starts_with: ID
+
+  """All values not starting with the given string."""
+  key_not_starts_with: ID
+
+  """All values ending with the given string."""
+  key_ends_with: ID
+
+  """All values not ending with the given string."""
+  key_not_ends_with: ID
+  installments_every: InstallmentEntryWhereInput
+  installments_some: InstallmentEntryWhereInput
+  installments_none: InstallmentEntryWhereInput
+  entries_every: EntryWhereInput
+  entries_some: EntryWhereInput
+  entries_none: EntryWhereInput
+  accounts_every: AccountWhereInput
+  accounts_some: AccountWhereInput
+  accounts_none: AccountWhereInput
+  users_every: UserWhereInput
+  users_some: UserWhereInput
+  users_none: UserWhereInput
+}
+
+input SheetWhereUniqueInput {
+  id: ID
+  key: ID
+}
+
 type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  sheet(where: SheetSubscriptionWhereInput): SheetSubscriptionPayload
+  installmentEntry(where: InstallmentEntrySubscriptionWhereInput): InstallmentEntrySubscriptionPayload
+  entry(where: EntrySubscriptionWhereInput): EntrySubscriptionPayload
+  account(where: AccountSubscriptionWhereInput): AccountSubscriptionPayload
 }
 
 type User implements Node {
@@ -416,7 +1857,7 @@ type User implements Node {
   email: String!
   password: String!
   name: String!
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  sheets(where: SheetWhereInput, orderBy: SheetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sheet!]
 }
 
 """A connection to a list of items."""
@@ -433,15 +1874,20 @@ input UserCreateInput {
   email: String!
   password: String!
   name: String!
-  posts: PostCreateManyWithoutAuthorInput
+  sheets: SheetCreateManyWithoutUsersInput
 }
 
-input UserCreateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
+input UserCreateManyWithoutSheetsInput {
+  create: [UserCreateWithoutSheetsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutPostsInput {
+input UserCreateWithoutSheetsInput {
   email: String!
   password: String!
   name: String!
@@ -517,30 +1963,57 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  email: String
+  password: String
+  name: String
+  sheets: SheetUpdateManyWithoutUsersInput
+}
+
 input UserUpdateInput {
   email: String
   password: String
   name: String
-  posts: PostUpdateManyWithoutAuthorInput
+  sheets: SheetUpdateManyWithoutUsersInput
 }
 
-input UserUpdateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
+input UserUpdateManyWithoutSheetsInput {
+  create: [UserCreateWithoutSheetsInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutSheetsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutSheetsInput!]
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
   delete: Boolean
-  update: UserUpdateWithoutPostsDataInput
-  upsert: UserUpsertWithoutPostsInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
 }
 
-input UserUpdateWithoutPostsDataInput {
+input UserUpdateWithoutSheetsDataInput {
   email: String
   password: String
   name: String
 }
 
-input UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput!
-  create: UserCreateWithoutPostsInput!
+input UserUpdateWithWhereUniqueWithoutSheetsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutSheetsDataInput!
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutSheetsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutSheetsDataInput!
+  create: UserCreateWithoutSheetsInput!
 }
 
 input UserWhereInput {
@@ -712,9 +2185,9 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  posts_every: PostWhereInput
-  posts_some: PostWhereInput
-  posts_none: PostWhereInput
+  sheets_every: SheetWhereInput
+  sheets_some: SheetWhereInput
+  sheets_none: SheetWhereInput
 }
 
 input UserWhereUniqueInput {

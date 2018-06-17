@@ -17,11 +17,13 @@ import { TunnelProvider } from 'react-tunnels';
 import { createStore } from 'redux';
 import 'tachyons';
 import 'typeface-roboto';
+import Dinero from 'dinero.js';
 import RootContainer from './components/RootContainer';
 import { AUTH_TOKEN } from './constant';
 import './index.css';
 
 moment.locale('pt-br');
+Dinero.globalLocale = 'pt-BR';
 
 const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

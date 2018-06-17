@@ -3,19 +3,28 @@ mutation {
     email: "developer@example.com"
     password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
     name: "Sarah"
-    posts: {
+    key: "seeded_id"
+    sheets: {
       create: [{
-        title: "Hello World 👋"
-        text: "I like turtles."
-        isPublished: true
-      }, {
-        title: "Join us at GraphQL Europe 🇪🇺 "
-        text: "Get a 10%-discount with this promo code on graphql-europe.org: gql-boilerplates"
-        isPublished: true
-      }, {
-        title: "Solving world hunger"
-        text: "This is a draft..."
-        isPublished: false
+        entries: { 
+          create: [{
+            value : "{\"amount\":200,\"precision\":2,\"currency\":\"R$\"}"
+            budget : false
+            title: "Despesa Teste"
+            key: "seeded_id"
+            sheet : {connect : {key: "seeded_id"}}
+            account : {
+              create : {
+                key: "seeded_id"
+                balance: "{\"amount\":0,\"precision\":2,\"currency\":\"R$\"}"
+                creditCard: false
+                receiveAccount: false
+                title: "Servicos essenciais"
+                sheet : {connect : {key: "seeded_id"}}
+              }
+            }           
+          }]
+        }
       }]
     }
   }) {
