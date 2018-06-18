@@ -3,12 +3,17 @@
 # import InstallmentEntry from "./generated/prisma.graphql"
 # import Entry from "./generated/prisma.graphql"
 # import Account from "./generated/prisma.graphql"
+scalar Date
+scalar DateTime
+scalar Time
 
 type Query {
   feed: [Post!]!
   drafts: [Post!]!
   post(id: ID!): Post
   me: User
+  incomesMonth(date: DateTime!, sheetId: ID!) : [Entry!]!
+  expensesMonth(date: DateTime!, sheetId: ID!) : [Entry!]!
 }
 
 type Mutation {

@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/public-neonbell-476/financeme/dev
-# timestamp: Sat Jun 16 2018 22:50:23 GMT-0300 (Brasilia Standard Time)
+# timestamp: Mon Jun 18 2018 00:33:06 GMT-0300 (Brasilia Standard Time)
 
 type Account implements Node {
   id: ID!
@@ -420,7 +420,7 @@ type Entry implements Node {
   account(where: AccountWhereInput): Account!
   recurring: Boolean!
   paidDate: DateTime
-  dueDate: DateTime
+  dueDate: DateTime!
   sheet(where: SheetWhereInput): Sheet!
 }
 
@@ -442,7 +442,7 @@ input EntryCreateInput {
   text: String
   recurring: Boolean
   paidDate: DateTime
-  dueDate: DateTime
+  dueDate: DateTime!
   author: UserCreateOneInput!
   account: AccountCreateOneInput!
   sheet: SheetCreateOneWithoutEntriesInput!
@@ -461,7 +461,7 @@ input EntryCreateWithoutSheetInput {
   text: String
   recurring: Boolean
   paidDate: DateTime
-  dueDate: DateTime
+  dueDate: DateTime!
   author: UserCreateOneInput!
   account: AccountCreateOneInput!
 }
@@ -511,7 +511,7 @@ type EntryPreviousValues {
   text: String
   recurring: Boolean!
   paidDate: DateTime
-  dueDate: DateTime
+  dueDate: DateTime!
 }
 
 type EntrySubscriptionPayload {

@@ -1,4 +1,4 @@
 import React from 'react';
-import { MonthTable } from '../tables/MonthTable';
+import { MonthTableContainer } from '../tables/MonthTableContainer';
 
-export const Home = () => <MonthTable />;
+export const Home = () => <MonthTableContainer />;

@@ -1,33 +1,41 @@
 mutation {
-  createUser(data: {
-    email: "developer@example.com"
-    password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
-    name: "Sarah"
-    key: "seeded_id"
-    sheets: {
-      create: [{
-        entries: { 
-          create: [{
-            value : "{\"amount\":200,\"precision\":2,\"currency\":\"R$\"}"
-            budget : false
-            title: "Despesa Teste"
-            key: "seeded_id"
-            sheet : {connect : {key: "seeded_id"}}
-            account : {
-              create : {
-                key: "seeded_id"
-                balance: "{\"amount\":0,\"precision\":2,\"currency\":\"R$\"}"
-                creditCard: false
-                receiveAccount: false
-                title: "Servicos essenciais"
-                sheet : {connect : {key: "seeded_id"}}
-              }
-            }           
-          }]
-        }
-      }]
+  createSheet(
+    data: {
+      key: "seeded_id"
+      users: { connect: [{ email: "teste@teste.com" }] }
     }
-  }) {
+  ) {
+    id
+  }
+}
+
+mutation {
+  createAccount(
+    data: {
+      key: "seeded_id"
+      balance: "{\"amount\":0,\"precision\":2,\"currency\":\"R$\"}"
+      creditCard: false
+      receiveAccount: false
+      title: "Servicos essenciais"
+      sheet: { connect: { key: "seeded_id" } }
+    }
+  ) {
+    id
+  }
+}
+
+mutation {
+  createEntry(
+    data: {
+      value: "{\"amount\":200,\"precision\":2,\"currency\":\"R$\"}"
+      budget: false
+      title: "Despesa Teste"
+      key: "seeded_id"
+      sheet: { connect: { key: "seeded_id" } }
+      account: { connect: { key: "seeded_id" } }
+      author: { connect: { email: "teste@teste.com" } }
+    }
+  ) {
     id
   }
 }

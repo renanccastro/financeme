@@ -56,7 +56,7 @@ class RootContainer extends Component {
       if (token !== null && token !== undefined) {
         const expired = isTokenExpired(token);
         if (!expired) {
-          this.setState({ token: token });
+          this.setState({ token });
         } else {
           localStorage.removeItem(AUTH_TOKEN);
           this.setState({ token: null });
@@ -67,7 +67,7 @@ class RootContainer extends Component {
     }
   }
 
-  //verify localStorage check
+  // verify localStorage check
   componentDidMount() {
     this.bootStrapData();
   }
@@ -92,7 +92,7 @@ class RootContainer extends Component {
         <NavLink
           className="link dim f6 f5-ns dib mr3 black"
           activeClassName="gray"
-          exact={true}
+          exact
           to="/"
           title="Feed"
         >
@@ -105,7 +105,7 @@ class RootContainer extends Component {
             <NavLink
               className="link dim f6 f5-ns dib mr3 black"
               activeClassName="gray"
-              exact={true}
+              exact
               to="/drafts"
               title="Drafts"
             >
@@ -173,12 +173,15 @@ class RootContainer extends Component {
   }
 }
 
-const ME_QUERY = gql`
+export const ME_QUERY = gql`
   query MeQuery {
     me {
       id
       email
       name
+      sheets {
+        id
+      }
     }
   }
 `;
