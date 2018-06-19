@@ -12,10 +12,14 @@ const entryQuery = (id, dateInitial, dateEnd, sheetId, receiveAccount) => ({
       },
       {
         sheet: {
-          id: sheetId,
-          users_some: {
-            id,
-          },
+          AND: [
+            { id: sheetId },
+            {
+              users_some: {
+                id,
+              },
+            },
+          ],
         },
       },
       {
@@ -64,6 +68,8 @@ const Query = {
     const id = getUserId(ctx);
     const dateInitial = moment(date).startOf('month');
     const dateEnd = moment(date).endOf('month');
+    console.log(dateInitial.toISOString());
+    console.log(dateEnd.toISOString());
     return ctx.db.query.entries(
       entryQuery(id, dateInitial, dateEnd, sheetId, false),
       info

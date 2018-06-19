@@ -21,7 +21,15 @@ type Sheet {
   installments : [InstallmentEntry!]! @relation(name: "InstallmentSheet", onDelete: CASCADE)
   entries : [Entry!]! @relation(name: "EntrySheet", onDelete: CASCADE)
   accounts : [Account!]! @relation(name: "AccountSheet", onDelete: CASCADE)
+  categories : [Category!]! @relation(name: "CategorySheet", onDelete: CASCADE)
   users: [User!]! @relation(name: "UserSheet")
+}
+
+type Category {
+  id: ID! @unique
+  key: ID @unique
+  title: String!
+  sheet: Sheet! @relation(name: "CategorySheet")
 }
 
 type InstallmentEntry {
@@ -30,6 +38,7 @@ type InstallmentEntry {
   value: Json!
   account: Account!
   sheet: Sheet! @relation(name: "InstallmentSheet")
+  category: Category!
 }
 type Entry {
   id: ID! @unique
@@ -42,6 +51,7 @@ type Entry {
   text: String
   author: User!
   account: Account!
+  category: Category!
   recurring: Boolean! @default(value: "false")
   paidDate: DateTime
   dueDate: DateTime!

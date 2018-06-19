@@ -8,6 +8,10 @@ export const entryFragment = gql`
     createdAt
     title
     text
+    category {
+      id
+      title
+    }
     author {
       id
       email

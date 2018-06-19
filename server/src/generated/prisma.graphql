@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/public-neonbell-476/financeme/dev
-# timestamp: Mon Jun 18 2018 00:33:06 GMT-0300 (Brasilia Standard Time)
+# timestamp: Mon Jun 18 2018 21:16:45 GMT-0300 (Brasilia Standard Time)
 
 type Account implements Node {
   id: ID!
@@ -380,6 +380,10 @@ type AggregateAccount {
   count: Int!
 }
 
+type AggregateCategory {
+  count: Int!
+}
+
 type AggregateEntry {
   count: Int!
 }
@@ -405,6 +409,298 @@ type BatchPayload {
   count: Long!
 }
 
+type Category implements Node {
+  id: ID!
+  key: ID
+  title: String!
+  sheet(where: SheetWhereInput): Sheet!
+}
+
+"""A connection to a list of items."""
+type CategoryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CategoryEdge]!
+  aggregate: AggregateCategory!
+}
+
+input CategoryCreateInput {
+  key: ID
+  title: String!
+  sheet: SheetCreateOneWithoutCategoriesInput!
+}
+
+input CategoryCreateManyWithoutSheetInput {
+  create: [CategoryCreateWithoutSheetInput!]
+  connect: [CategoryWhereUniqueInput!]
+}
+
+input CategoryCreateOneInput {
+  create: CategoryCreateInput
+  connect: CategoryWhereUniqueInput
+}
+
+input CategoryCreateWithoutSheetInput {
+  key: ID
+  title: String!
+}
+
+"""An edge in a connection."""
+type CategoryEdge {
+  """The item at the end of the edge."""
+  node: Category!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CategoryOrderByInput {
+  id_ASC
+  id_DESC
+  key_ASC
+  key_DESC
+  title_ASC
+  title_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CategoryPreviousValues {
+  id: ID!
+  key: ID
+  title: String!
+}
+
+type CategorySubscriptionPayload {
+  mutation: MutationType!
+  node: Category
+  updatedFields: [String!]
+  previousValues: CategoryPreviousValues
+}
+
+input CategorySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CategorySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CategorySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategorySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CategoryWhereInput
+}
+
+input CategoryUpdateDataInput {
+  key: ID
+  title: String
+  sheet: SheetUpdateOneWithoutCategoriesInput
+}
+
+input CategoryUpdateInput {
+  key: ID
+  title: String
+  sheet: SheetUpdateOneWithoutCategoriesInput
+}
+
+input CategoryUpdateManyWithoutSheetInput {
+  create: [CategoryCreateWithoutSheetInput!]
+  connect: [CategoryWhereUniqueInput!]
+  disconnect: [CategoryWhereUniqueInput!]
+  delete: [CategoryWhereUniqueInput!]
+  update: [CategoryUpdateWithWhereUniqueWithoutSheetInput!]
+  upsert: [CategoryUpsertWithWhereUniqueWithoutSheetInput!]
+}
+
+input CategoryUpdateOneInput {
+  create: CategoryCreateInput
+  connect: CategoryWhereUniqueInput
+  delete: Boolean
+  update: CategoryUpdateDataInput
+  upsert: CategoryUpsertNestedInput
+}
+
+input CategoryUpdateWithoutSheetDataInput {
+  key: ID
+  title: String
+}
+
+input CategoryUpdateWithWhereUniqueWithoutSheetInput {
+  where: CategoryWhereUniqueInput!
+  data: CategoryUpdateWithoutSheetDataInput!
+}
+
+input CategoryUpsertNestedInput {
+  update: CategoryUpdateDataInput!
+  create: CategoryCreateInput!
+}
+
+input CategoryUpsertWithWhereUniqueWithoutSheetInput {
+  where: CategoryWhereUniqueInput!
+  update: CategoryUpdateWithoutSheetDataInput!
+  create: CategoryCreateWithoutSheetInput!
+}
+
+input CategoryWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CategoryWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CategoryWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategoryWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  key: ID
+
+  """All values that are not equal to given value."""
+  key_not: ID
+
+  """All values that are contained in given list."""
+  key_in: [ID!]
+
+  """All values that are not contained in given list."""
+  key_not_in: [ID!]
+
+  """All values less than the given value."""
+  key_lt: ID
+
+  """All values less than or equal the given value."""
+  key_lte: ID
+
+  """All values greater than the given value."""
+  key_gt: ID
+
+  """All values greater than or equal the given value."""
+  key_gte: ID
+
+  """All values containing the given string."""
+  key_contains: ID
+
+  """All values not containing the given string."""
+  key_not_contains: ID
+
+  """All values starting with the given string."""
+  key_starts_with: ID
+
+  """All values not starting with the given string."""
+  key_not_starts_with: ID
+
+  """All values ending with the given string."""
+  key_ends_with: ID
+
+  """All values not ending with the given string."""
+  key_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  sheet: SheetWhereInput
+}
+
+input CategoryWhereUniqueInput {
+  id: ID
+  key: ID
+}
+
 scalar DateTime
 
 type Entry implements Node {
@@ -418,6 +714,7 @@ type Entry implements Node {
   text: String
   author(where: UserWhereInput): User!
   account(where: AccountWhereInput): Account!
+  category(where: CategoryWhereInput): Category!
   recurring: Boolean!
   paidDate: DateTime
   dueDate: DateTime!
@@ -445,6 +742,7 @@ input EntryCreateInput {
   dueDate: DateTime!
   author: UserCreateOneInput!
   account: AccountCreateOneInput!
+  category: CategoryCreateOneInput!
   sheet: SheetCreateOneWithoutEntriesInput!
 }
 
@@ -464,6 +762,7 @@ input EntryCreateWithoutSheetInput {
   dueDate: DateTime!
   author: UserCreateOneInput!
   account: AccountCreateOneInput!
+  category: CategoryCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -564,6 +863,7 @@ input EntryUpdateInput {
   dueDate: DateTime
   author: UserUpdateOneInput
   account: AccountUpdateOneInput
+  category: CategoryUpdateOneInput
   sheet: SheetUpdateOneWithoutEntriesInput
 }
 
@@ -587,6 +887,7 @@ input EntryUpdateWithoutSheetDataInput {
   dueDate: DateTime
   author: UserUpdateOneInput
   account: AccountUpdateOneInput
+  category: CategoryUpdateOneInput
 }
 
 input EntryUpdateWithWhereUniqueWithoutSheetInput {
@@ -867,6 +1168,7 @@ input EntryWhereInput {
   dueDate_gte: DateTime
   author: UserWhereInput
   account: AccountWhereInput
+  category: CategoryWhereInput
   sheet: SheetWhereInput
 }
 
@@ -881,6 +1183,7 @@ type InstallmentEntry implements Node {
   value: Json!
   account(where: AccountWhereInput): Account!
   sheet(where: SheetWhereInput): Sheet!
+  category(where: CategoryWhereInput): Category!
 }
 
 """A connection to a list of items."""
@@ -898,6 +1201,7 @@ input InstallmentEntryCreateInput {
   value: Json!
   account: AccountCreateOneInput!
   sheet: SheetCreateOneWithoutInstallmentsInput!
+  category: CategoryCreateOneInput!
 }
 
 input InstallmentEntryCreateManyWithoutSheetInput {
@@ -909,6 +1213,7 @@ input InstallmentEntryCreateWithoutSheetInput {
   key: ID
   value: Json!
   account: AccountCreateOneInput!
+  category: CategoryCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -983,6 +1288,7 @@ input InstallmentEntryUpdateInput {
   value: Json
   account: AccountUpdateOneInput
   sheet: SheetUpdateOneWithoutInstallmentsInput
+  category: CategoryUpdateOneInput
 }
 
 input InstallmentEntryUpdateManyWithoutSheetInput {
@@ -998,6 +1304,7 @@ input InstallmentEntryUpdateWithoutSheetDataInput {
   key: ID
   value: Json
   account: AccountUpdateOneInput
+  category: CategoryUpdateOneInput
 }
 
 input InstallmentEntryUpdateWithWhereUniqueWithoutSheetInput {
@@ -1102,6 +1409,7 @@ input InstallmentEntryWhereInput {
   key_not_ends_with: ID
   account: AccountWhereInput
   sheet: SheetWhereInput
+  category: CategoryWhereInput
 }
 
 input InstallmentEntryWhereUniqueInput {
@@ -1122,36 +1430,42 @@ type Mutation {
   createPost(data: PostCreateInput!): Post!
   createUser(data: UserCreateInput!): User!
   createSheet(data: SheetCreateInput!): Sheet!
+  createCategory(data: CategoryCreateInput!): Category!
   createInstallmentEntry(data: InstallmentEntryCreateInput!): InstallmentEntry!
   createEntry(data: EntryCreateInput!): Entry!
   createAccount(data: AccountCreateInput!): Account!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateSheet(data: SheetUpdateInput!, where: SheetWhereUniqueInput!): Sheet
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   updateInstallmentEntry(data: InstallmentEntryUpdateInput!, where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
   updateEntry(data: EntryUpdateInput!, where: EntryWhereUniqueInput!): Entry
   updateAccount(data: AccountUpdateInput!, where: AccountWhereUniqueInput!): Account
   deletePost(where: PostWhereUniqueInput!): Post
   deleteUser(where: UserWhereUniqueInput!): User
   deleteSheet(where: SheetWhereUniqueInput!): Sheet
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
   deleteInstallmentEntry(where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
   deleteEntry(where: EntryWhereUniqueInput!): Entry
   deleteAccount(where: AccountWhereUniqueInput!): Account
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertSheet(where: SheetWhereUniqueInput!, create: SheetCreateInput!, update: SheetUpdateInput!): Sheet!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   upsertInstallmentEntry(where: InstallmentEntryWhereUniqueInput!, create: InstallmentEntryCreateInput!, update: InstallmentEntryUpdateInput!): InstallmentEntry!
   upsertEntry(where: EntryWhereUniqueInput!, create: EntryCreateInput!, update: EntryUpdateInput!): Entry!
   upsertAccount(where: AccountWhereUniqueInput!, create: AccountCreateInput!, update: AccountUpdateInput!): Account!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManySheets(data: SheetUpdateInput!, where: SheetWhereInput): BatchPayload!
+  updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
   updateManyInstallmentEntries(data: InstallmentEntryUpdateInput!, where: InstallmentEntryWhereInput): BatchPayload!
   updateManyEntries(data: EntryUpdateInput!, where: EntryWhereInput): BatchPayload!
   updateManyAccounts(data: AccountUpdateInput!, where: AccountWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManySheets(where: SheetWhereInput): BatchPayload!
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
   deleteManyInstallmentEntries(where: InstallmentEntryWhereInput): BatchPayload!
   deleteManyEntries(where: EntryWhereInput): BatchPayload!
   deleteManyAccounts(where: AccountWhereInput): BatchPayload!
@@ -1478,18 +1792,21 @@ type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   sheets(where: SheetWhereInput, orderBy: SheetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sheet]!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   installmentEntries(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [InstallmentEntry]!
   entries(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Entry]!
   accounts(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Account]!
   post(where: PostWhereUniqueInput!): Post
   user(where: UserWhereUniqueInput!): User
   sheet(where: SheetWhereUniqueInput!): Sheet
+  category(where: CategoryWhereUniqueInput!): Category
   installmentEntry(where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
   entry(where: EntryWhereUniqueInput!): Entry
   account(where: AccountWhereUniqueInput!): Account
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   sheetsConnection(where: SheetWhereInput, orderBy: SheetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SheetConnection!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
   installmentEntriesConnection(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InstallmentEntryConnection!
   entriesConnection(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EntryConnection!
   accountsConnection(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccountConnection!
@@ -1507,6 +1824,7 @@ type Sheet implements Node {
   installments(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [InstallmentEntry!]
   entries(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Entry!]
   accounts(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Account!]
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
@@ -1525,6 +1843,7 @@ input SheetCreateInput {
   installments: InstallmentEntryCreateManyWithoutSheetInput
   entries: EntryCreateManyWithoutSheetInput
   accounts: AccountCreateManyWithoutSheetInput
+  categories: CategoryCreateManyWithoutSheetInput
   users: UserCreateManyWithoutSheetsInput
 }
 
@@ -1535,6 +1854,11 @@ input SheetCreateManyWithoutUsersInput {
 
 input SheetCreateOneWithoutAccountsInput {
   create: SheetCreateWithoutAccountsInput
+  connect: SheetWhereUniqueInput
+}
+
+input SheetCreateOneWithoutCategoriesInput {
+  create: SheetCreateWithoutCategoriesInput
   connect: SheetWhereUniqueInput
 }
 
@@ -1552,6 +1876,15 @@ input SheetCreateWithoutAccountsInput {
   key: ID
   installments: InstallmentEntryCreateManyWithoutSheetInput
   entries: EntryCreateManyWithoutSheetInput
+  categories: CategoryCreateManyWithoutSheetInput
+  users: UserCreateManyWithoutSheetsInput
+}
+
+input SheetCreateWithoutCategoriesInput {
+  key: ID
+  installments: InstallmentEntryCreateManyWithoutSheetInput
+  entries: EntryCreateManyWithoutSheetInput
+  accounts: AccountCreateManyWithoutSheetInput
   users: UserCreateManyWithoutSheetsInput
 }
 
@@ -1559,6 +1892,7 @@ input SheetCreateWithoutEntriesInput {
   key: ID
   installments: InstallmentEntryCreateManyWithoutSheetInput
   accounts: AccountCreateManyWithoutSheetInput
+  categories: CategoryCreateManyWithoutSheetInput
   users: UserCreateManyWithoutSheetsInput
 }
 
@@ -1566,6 +1900,7 @@ input SheetCreateWithoutInstallmentsInput {
   key: ID
   entries: EntryCreateManyWithoutSheetInput
   accounts: AccountCreateManyWithoutSheetInput
+  categories: CategoryCreateManyWithoutSheetInput
   users: UserCreateManyWithoutSheetsInput
 }
 
@@ -1574,6 +1909,7 @@ input SheetCreateWithoutUsersInput {
   installments: InstallmentEntryCreateManyWithoutSheetInput
   entries: EntryCreateManyWithoutSheetInput
   accounts: AccountCreateManyWithoutSheetInput
+  categories: CategoryCreateManyWithoutSheetInput
 }
 
 """An edge in a connection."""
@@ -1645,6 +1981,7 @@ input SheetUpdateInput {
   installments: InstallmentEntryUpdateManyWithoutSheetInput
   entries: EntryUpdateManyWithoutSheetInput
   accounts: AccountUpdateManyWithoutSheetInput
+  categories: CategoryUpdateManyWithoutSheetInput
   users: UserUpdateManyWithoutSheetsInput
 }
 
@@ -1663,6 +2000,14 @@ input SheetUpdateOneWithoutAccountsInput {
   delete: Boolean
   update: SheetUpdateWithoutAccountsDataInput
   upsert: SheetUpsertWithoutAccountsInput
+}
+
+input SheetUpdateOneWithoutCategoriesInput {
+  create: SheetCreateWithoutCategoriesInput
+  connect: SheetWhereUniqueInput
+  delete: Boolean
+  update: SheetUpdateWithoutCategoriesDataInput
+  upsert: SheetUpsertWithoutCategoriesInput
 }
 
 input SheetUpdateOneWithoutEntriesInput {
@@ -1685,6 +2030,15 @@ input SheetUpdateWithoutAccountsDataInput {
   key: ID
   installments: InstallmentEntryUpdateManyWithoutSheetInput
   entries: EntryUpdateManyWithoutSheetInput
+  categories: CategoryUpdateManyWithoutSheetInput
+  users: UserUpdateManyWithoutSheetsInput
+}
+
+input SheetUpdateWithoutCategoriesDataInput {
+  key: ID
+  installments: InstallmentEntryUpdateManyWithoutSheetInput
+  entries: EntryUpdateManyWithoutSheetInput
+  accounts: AccountUpdateManyWithoutSheetInput
   users: UserUpdateManyWithoutSheetsInput
 }
 
@@ -1692,6 +2046,7 @@ input SheetUpdateWithoutEntriesDataInput {
   key: ID
   installments: InstallmentEntryUpdateManyWithoutSheetInput
   accounts: AccountUpdateManyWithoutSheetInput
+  categories: CategoryUpdateManyWithoutSheetInput
   users: UserUpdateManyWithoutSheetsInput
 }
 
@@ -1699,6 +2054,7 @@ input SheetUpdateWithoutInstallmentsDataInput {
   key: ID
   entries: EntryUpdateManyWithoutSheetInput
   accounts: AccountUpdateManyWithoutSheetInput
+  categories: CategoryUpdateManyWithoutSheetInput
   users: UserUpdateManyWithoutSheetsInput
 }
 
@@ -1707,6 +2063,7 @@ input SheetUpdateWithoutUsersDataInput {
   installments: InstallmentEntryUpdateManyWithoutSheetInput
   entries: EntryUpdateManyWithoutSheetInput
   accounts: AccountUpdateManyWithoutSheetInput
+  categories: CategoryUpdateManyWithoutSheetInput
 }
 
 input SheetUpdateWithWhereUniqueWithoutUsersInput {
@@ -1717,6 +2074,11 @@ input SheetUpdateWithWhereUniqueWithoutUsersInput {
 input SheetUpsertWithoutAccountsInput {
   update: SheetUpdateWithoutAccountsDataInput!
   create: SheetCreateWithoutAccountsInput!
+}
+
+input SheetUpsertWithoutCategoriesInput {
+  update: SheetUpdateWithoutCategoriesDataInput!
+  create: SheetCreateWithoutCategoriesInput!
 }
 
 input SheetUpsertWithoutEntriesInput {
@@ -1833,6 +2195,9 @@ input SheetWhereInput {
   accounts_every: AccountWhereInput
   accounts_some: AccountWhereInput
   accounts_none: AccountWhereInput
+  categories_every: CategoryWhereInput
+  categories_some: CategoryWhereInput
+  categories_none: CategoryWhereInput
   users_every: UserWhereInput
   users_some: UserWhereInput
   users_none: UserWhereInput
@@ -1847,6 +2212,7 @@ type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   sheet(where: SheetSubscriptionWhereInput): SheetSubscriptionPayload
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
   installmentEntry(where: InstallmentEntrySubscriptionWhereInput): InstallmentEntrySubscriptionPayload
   entry(where: EntrySubscriptionWhereInput): EntrySubscriptionPayload
   account(where: AccountSubscriptionWhereInput): AccountSubscriptionPayload

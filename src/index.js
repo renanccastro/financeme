@@ -22,11 +22,13 @@ import 'typeface-roboto';
 import RootContainer from './components/RootContainer';
 import { AUTH_TOKEN } from './constant';
 import './index.css';
+import { appState } from './reducers';
 
 moment.locale('pt-br');
 Dinero.globalLocale = 'pt-BR';
 
 const store = createStore(
+  appState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 const theme = createMuiTheme({

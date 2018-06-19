@@ -17,7 +17,7 @@ const styles = theme => ({
 const columns = [
   {
     Header: 'Data',
-    accessor: 'title',
+    accessor: 'dueDate',
     // Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
   },
   {
@@ -27,45 +27,47 @@ const columns = [
   },
   {
     Header: 'Categoria',
-    accessor: 'title',
+    accessor: 'category.title',
     // Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
   },
   {
     Header: 'Conta',
-    accessor: 'title',
+    accessor: 'account.title',
     // Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
   },
   {
     Header: 'Recebido',
-    accessor: 'title',
+    accessor: 'paidDate',
     // Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
   },
   {
-    Header: 'Total',
-    accessor: 'title',
+    Header: 'Valor',
+    accessor: 'value.amount',
     // Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
   },
 ];
 
-export const MonthTable = withStyles(styles)(({ classes, data }) => (
-  <div>
-    <h1>Receita</h1>
-    <Paper className={classes.root}>
-      <ReactTable
-        defaultPageSize={data && data.expenses ? data.expenses.length : 0}
-        showPagination={false}
-        data={(data && data.expenses) || []}
-        columns={columns}
-      />
-    </Paper>
-    <h1>Despesa</h1>
-    <Paper className={classes.root}>
-      <ReactTable
-        defaultPageSize={data && data.incomes ? data.incomes.length : 0}
-        showPagination={false}
-        data={(data && data.incomes) || []}
-        columns={columns}
-      />
-    </Paper>
-  </div>
-));
+export const MonthTable = withStyles(styles)(
+  ({ classes, expenses: { expensesMonth }, incomes: { incomesMonth } }) => (
+    <div>
+      <h1>Receita</h1>
+      <Paper className={classes.root}>
+        <ReactTable
+          defaultPageSize={incomesMonth ? incomesMonth.length : 0}
+          showPagination={false}
+          data={incomesMonth || []}
+          columns={columns}
+        />
+      </Paper>
+      <h1>Despesa</h1>
+      <Paper className={classes.root}>
+        <ReactTable
+          defaultPageSize={expensesMonth ? expensesMonth.length : 0}
+          showPagination={false}
+          data={expensesMonth || []}
+          columns={columns}
+        />
+      </Paper>
+    </div>
+  )
+);

@@ -1,5 +1,5 @@
 mutation {
-  createSheet(
+  sheet: createSheet(
     data: {
       key: "seeded_id"
       users: { connect: [{ email: "teste@teste.com" }] }
@@ -7,10 +7,16 @@ mutation {
   ) {
     id
   }
-}
-
-mutation {
-  createAccount(
+  category: createCategory(
+    data: {
+      key: "seeded_id"
+      title: "Teste"
+      sheet: { connect: { key: "seeded_id" } }
+    }
+  ) {
+    id
+  }
+  account: createAccount(
     data: {
       key: "seeded_id"
       balance: "{\"amount\":0,\"precision\":2,\"currency\":\"R$\"}"
@@ -22,10 +28,7 @@ mutation {
   ) {
     id
   }
-}
-
-mutation {
-  createEntry(
+  entry: createEntry(
     data: {
       value: "{\"amount\":200,\"precision\":2,\"currency\":\"R$\"}"
       budget: false
@@ -34,6 +37,8 @@ mutation {
       sheet: { connect: { key: "seeded_id" } }
       account: { connect: { key: "seeded_id" } }
       author: { connect: { email: "teste@teste.com" } }
+      category: { connect: { key: "seeded_id" } }
+      dueDate: "2018-07-01T02:59:59.999Z"
     }
   ) {
     id
