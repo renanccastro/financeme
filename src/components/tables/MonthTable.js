@@ -2,6 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import ReactTable from 'react-table';
+import accounting from 'accounting';
 
 const styles = theme => ({
   root: {
@@ -43,7 +44,11 @@ const columns = [
   {
     Header: 'Valor',
     accessor: 'value.amount',
-    // Cell: props => <span className="number">{props.value}</span>, // Custom cell components!
+    Cell: props => (
+      <span className="number">
+        {accounting.formatMoney(props.value, 'R$', 2, '.', ',')}
+      </span>
+    ), // Custom cell components!
   },
 ];
 
