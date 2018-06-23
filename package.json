@@ -36,6 +36,7 @@
     "apollo-utilities": "1.0.15",
     "axios": "^0.18.0",
     "bcrypt": "^2.0.1",
+    "big.js": "^5.1.2",
     "dinero.js": "^1.4.0",
     "enum": "^2.5.0",
     "enumify": "^1.0.4",

@@ -16,6 +16,9 @@ import LogoutPage from './LogoutPage';
 import PageNotFound from './PageNotFound';
 import SignupPage from './SignupPage';
 import { Home } from './home/Home';
+import { AddExpenseIncomeContainer } from './modal/AddExpenseIncomeContainer';
+import { showAddExpenseIncomeModal } from '../reducers/modalReducer';
+import { store } from '..';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem(AUTH_TOKEN);
@@ -137,12 +140,14 @@ class RootContainer extends Component {
           this.props.data.me &&
           this.props.data.me.email &&
           this.state.token && (
-            <Link
-              to="/create"
+            <div
               className="f6 link dim br1 ba ph3 pv2 fr mb2 dib black"
+              onClick={() => {
+                store.dispatch(showAddExpenseIncomeModal());
+              }}
             >
               + Create Draft
-            </Link>
+            </div>
           )}
       </nav>
     );
@@ -151,6 +156,7 @@ class RootContainer extends Component {
   renderRoute() {
     return (
       <div className="fl w-100 pl4 pr4">
+        <AddExpenseIncomeContainer />
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
           <Route

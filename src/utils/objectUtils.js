@@ -8,6 +8,9 @@ export const cleanArray = a => uniq(a.filter(n => n));
 export const getFirstFromSingleElementArray = (array = []) =>
   array.length === 1 ? array[0] : null;
 
+export const getFirstFromSingleElementArrayNotNull = (array = []) =>
+  array.length === 1 ? array[0] : {};
+
 export const isEmptyOrNull = value => value == null || value.length === 0;
 export const isNotEmptyOrNull = value => !isEmptyOrNull(value);
 

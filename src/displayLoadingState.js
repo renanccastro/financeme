@@ -1,7 +1,7 @@
 import { branch, renderComponent } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { Loading } from './Loading';
-import { isNotEmptyOrNull } from './objectUtils';
+import { isNotEmptyOrNull } from './utils/objectUtils';
 import { Error } from './Error';
 
 const passivelyRefetching = networkStatus =>

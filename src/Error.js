@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Snackbar } from '@material-ui/core';
-import { showBackButton, updateAppTitle } from './uiUtils';
+import { showBackButton, updateAppTitle } from './utils/uiUtils';
 
 export const Error = ({ history }) => (
   <Fragment>

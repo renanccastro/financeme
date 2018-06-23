@@ -7,6 +7,11 @@ scalar Date
 scalar DateTime
 scalar Time
 
+enum TypeEnum{
+  EXPENSE,
+  INCOME
+}
+
 type Query {
   feed: [Post!]!
   drafts: [Post!]!

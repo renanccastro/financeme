@@ -1,7 +1,7 @@
-import React from 'react';
-import { Tunnel } from 'react-tunnels';
 import { IconButton } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
+import React from 'react';
+import { Tunnel } from 'react-tunnels';
 
 export const updateAppTitle = title => {
   if (document) {
@@ -10,7 +10,7 @@ export const updateAppTitle = title => {
   return <Tunnel id="app-title">{title || 'WF-V'}</Tunnel>;
 };
 
-export const showBackButton = ({ action, history = {} } = {}) => (
+export const showBackButton = ({ action, history } = {}) => (
   <Tunnel id="toolbar-left-icon">
     <IconButton
       style={{
@@ -21,6 +21,17 @@ export const showBackButton = ({ action, history = {} } = {}) => (
       color="inherit"
     >
       <ArrowBack />
+    </IconButton>
+  </Tunnel>
+);
+export const showRightIcon = ({ action, history, route, component } = {}) => (
+  <Tunnel id="toolbar-right-icon">
+    <IconButton
+      style={{}}
+      onClick={action || (() => history.push(route))}
+      color="inherit"
+    >
+      {component}
     </IconButton>
   </Tunnel>
 );
