@@ -3,6 +3,8 @@
 # import InstallmentEntry from "./generated/prisma.graphql"
 # import Entry from "./generated/prisma.graphql"
 # import Account from "./generated/prisma.graphql"
+# import Category from "./generated/prisma.graphql"
+
 scalar Date
 scalar DateTime
 scalar Time
@@ -19,6 +21,8 @@ type Query {
   me: User
   incomesMonth(date: DateTime!, sheetId: ID!) : [Entry!]!
   expensesMonth(date: DateTime!, sheetId: ID!) : [Entry!]!
+  allCategories : [Category]
+  allAccounts : [Account]
 }
 
 type Mutation {

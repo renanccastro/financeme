@@ -23,7 +23,7 @@ import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
 import MaskedInput from 'react-text-mask';
 import { formValueSelector, Field } from 'redux-form';
-import { isEmptyOrNull } from './utils/objectUtils';
+import { isEmptyOrNull } from './objectUtils';
 
 export const submitWithAction = ({ handleSubmit, onSubmit, action }) => () => {
   handleSubmit((values, dispatch, props) =>

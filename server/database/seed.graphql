@@ -19,7 +19,7 @@ mutation {
   account: createAccount(
     data: {
       key: "seeded_id"
-      balance: "{\"amount\":0,\"precision\":2,\"currency\":\"R$\"}"
+      balance: "0"
       creditCard: false
       receiveAccount: false
       title: "Servicos essenciais"
@@ -30,7 +30,7 @@ mutation {
   }
   entry: createEntry(
     data: {
-      value: "{\"amount\":200,\"precision\":2,\"currency\":\"R$\"}"
+      value: "200"
       budget: false
       title: "Despesa Teste"
       key: "seeded_id"

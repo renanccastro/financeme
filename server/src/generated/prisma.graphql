@@ -1,10 +1,10 @@
 # source: https://us1.prisma.sh/public-neonbell-476/financeme/dev
-# timestamp: Mon Jun 18 2018 21:16:45 GMT-0300 (Brasilia Standard Time)
+# timestamp: Fri Jun 22 2018 23:16:43 GMT-0300 (Brasilia Standard Time)
 
 type Account implements Node {
   id: ID!
   key: ID
-  balance: Json!
+  balance: String!
   updatedAt: DateTime!
   createdAt: DateTime!
   creditCard: Boolean!
@@ -25,7 +25,7 @@ type AccountConnection {
 
 input AccountCreateInput {
   key: ID
-  balance: Json!
+  balance: String!
   creditCard: Boolean
   receiveAccount: Boolean
   title: String!
@@ -44,7 +44,7 @@ input AccountCreateOneInput {
 
 input AccountCreateWithoutSheetInput {
   key: ID
-  balance: Json!
+  balance: String!
   creditCard: Boolean
   receiveAccount: Boolean
   title: String!
@@ -81,7 +81,7 @@ enum AccountOrderByInput {
 type AccountPreviousValues {
   id: ID!
   key: ID
-  balance: Json!
+  balance: String!
   updatedAt: DateTime!
   createdAt: DateTime!
   creditCard: Boolean!
@@ -130,7 +130,7 @@ input AccountSubscriptionWhereInput {
 
 input AccountUpdateDataInput {
   key: ID
-  balance: Json
+  balance: String
   creditCard: Boolean
   receiveAccount: Boolean
   title: String
@@ -139,7 +139,7 @@ input AccountUpdateDataInput {
 
 input AccountUpdateInput {
   key: ID
-  balance: Json
+  balance: String
   creditCard: Boolean
   receiveAccount: Boolean
   title: String
@@ -165,7 +165,7 @@ input AccountUpdateOneInput {
 
 input AccountUpdateWithoutSheetDataInput {
   key: ID
-  balance: Json
+  balance: String
   creditCard: Boolean
   receiveAccount: Boolean
   title: String
@@ -276,6 +276,46 @@ input AccountWhereInput {
 
   """All values not ending with the given string."""
   key_not_ends_with: ID
+  balance: String
+
+  """All values that are not equal to given value."""
+  balance_not: String
+
+  """All values that are contained in given list."""
+  balance_in: [String!]
+
+  """All values that are not contained in given list."""
+  balance_not_in: [String!]
+
+  """All values less than the given value."""
+  balance_lt: String
+
+  """All values less than or equal the given value."""
+  balance_lte: String
+
+  """All values greater than the given value."""
+  balance_gt: String
+
+  """All values greater than or equal the given value."""
+  balance_gte: String
+
+  """All values containing the given string."""
+  balance_contains: String
+
+  """All values not containing the given string."""
+  balance_not_contains: String
+
+  """All values starting with the given string."""
+  balance_starts_with: String
+
+  """All values not starting with the given string."""
+  balance_not_starts_with: String
+
+  """All values ending with the given string."""
+  balance_ends_with: String
+
+  """All values not ending with the given string."""
+  balance_not_ends_with: String
   updatedAt: DateTime
 
   """All values that are not equal to given value."""
@@ -369,6 +409,12 @@ input AccountWhereInput {
   """All values not ending with the given string."""
   title_not_ends_with: String
   sheet: SheetWhereInput
+  _MagicalBackRelation_AccountToEntry_every: EntryWhereInput
+  _MagicalBackRelation_AccountToEntry_some: EntryWhereInput
+  _MagicalBackRelation_AccountToEntry_none: EntryWhereInput
+  _MagicalBackRelation_AccountToInstallmentEntry_every: InstallmentEntryWhereInput
+  _MagicalBackRelation_AccountToInstallmentEntry_some: InstallmentEntryWhereInput
+  _MagicalBackRelation_AccountToInstallmentEntry_none: InstallmentEntryWhereInput
 }
 
 input AccountWhereUniqueInput {
@@ -694,6 +740,12 @@ input CategoryWhereInput {
   """All values not ending with the given string."""
   title_not_ends_with: String
   sheet: SheetWhereInput
+  _MagicalBackRelation_CategoryToEntry_every: EntryWhereInput
+  _MagicalBackRelation_CategoryToEntry_some: EntryWhereInput
+  _MagicalBackRelation_CategoryToEntry_none: EntryWhereInput
+  _MagicalBackRelation_CategoryToInstallmentEntry_every: InstallmentEntryWhereInput
+  _MagicalBackRelation_CategoryToInstallmentEntry_some: InstallmentEntryWhereInput
+  _MagicalBackRelation_CategoryToInstallmentEntry_none: InstallmentEntryWhereInput
 }
 
 input CategoryWhereUniqueInput {
@@ -706,7 +758,7 @@ scalar DateTime
 type Entry implements Node {
   id: ID!
   key: ID
-  value: Json!
+  value: String!
   budget: Boolean!
   updatedAt: DateTime!
   createdAt: DateTime!
@@ -733,7 +785,7 @@ type EntryConnection {
 
 input EntryCreateInput {
   key: ID
-  value: Json!
+  value: String!
   budget: Boolean
   title: String!
   text: String
@@ -753,7 +805,7 @@ input EntryCreateManyWithoutSheetInput {
 
 input EntryCreateWithoutSheetInput {
   key: ID
-  value: Json!
+  value: String!
   budget: Boolean
   title: String!
   text: String
@@ -802,7 +854,7 @@ enum EntryOrderByInput {
 type EntryPreviousValues {
   id: ID!
   key: ID
-  value: Json!
+  value: String!
   budget: Boolean!
   updatedAt: DateTime!
   createdAt: DateTime!
@@ -854,7 +906,7 @@ input EntrySubscriptionWhereInput {
 
 input EntryUpdateInput {
   key: ID
-  value: Json
+  value: String
   budget: Boolean
   title: String
   text: String
@@ -878,7 +930,7 @@ input EntryUpdateManyWithoutSheetInput {
 
 input EntryUpdateWithoutSheetDataInput {
   key: ID
-  value: Json
+  value: String
   budget: Boolean
   title: String
   text: String
@@ -990,6 +1042,46 @@ input EntryWhereInput {
 
   """All values not ending with the given string."""
   key_not_ends_with: ID
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
   budget: Boolean
 
   """All values that are not equal to given value."""
@@ -1180,7 +1272,7 @@ input EntryWhereUniqueInput {
 type InstallmentEntry implements Node {
   id: ID!
   key: ID
-  value: Json!
+  value: String!
   account(where: AccountWhereInput): Account!
   sheet(where: SheetWhereInput): Sheet!
   category(where: CategoryWhereInput): Category!
@@ -1198,7 +1290,7 @@ type InstallmentEntryConnection {
 
 input InstallmentEntryCreateInput {
   key: ID
-  value: Json!
+  value: String!
   account: AccountCreateOneInput!
   sheet: SheetCreateOneWithoutInstallmentsInput!
   category: CategoryCreateOneInput!
@@ -1211,7 +1303,7 @@ input InstallmentEntryCreateManyWithoutSheetInput {
 
 input InstallmentEntryCreateWithoutSheetInput {
   key: ID
-  value: Json!
+  value: String!
   account: AccountCreateOneInput!
   category: CategoryCreateOneInput!
 }
@@ -1241,7 +1333,7 @@ enum InstallmentEntryOrderByInput {
 type InstallmentEntryPreviousValues {
   id: ID!
   key: ID
-  value: Json!
+  value: String!
 }
 
 type InstallmentEntrySubscriptionPayload {
@@ -1285,7 +1377,7 @@ input InstallmentEntrySubscriptionWhereInput {
 
 input InstallmentEntryUpdateInput {
   key: ID
-  value: Json
+  value: String
   account: AccountUpdateOneInput
   sheet: SheetUpdateOneWithoutInstallmentsInput
   category: CategoryUpdateOneInput
@@ -1302,7 +1394,7 @@ input InstallmentEntryUpdateManyWithoutSheetInput {
 
 input InstallmentEntryUpdateWithoutSheetDataInput {
   key: ID
-  value: Json
+  value: String
   account: AccountUpdateOneInput
   category: CategoryUpdateOneInput
 }
@@ -1407,6 +1499,46 @@ input InstallmentEntryWhereInput {
 
   """All values not ending with the given string."""
   key_not_ends_with: ID
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
   account: AccountWhereInput
   sheet: SheetWhereInput
   category: CategoryWhereInput
@@ -1417,9 +1549,6 @@ input InstallmentEntryWhereUniqueInput {
   key: ID
 }
 
-"""Raw JSON value"""
-scalar Json
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -1428,46 +1557,46 @@ scalar Long
 
 type Mutation {
   createPost(data: PostCreateInput!): Post!
-  createUser(data: UserCreateInput!): User!
   createSheet(data: SheetCreateInput!): Sheet!
-  createCategory(data: CategoryCreateInput!): Category!
   createInstallmentEntry(data: InstallmentEntryCreateInput!): InstallmentEntry!
   createEntry(data: EntryCreateInput!): Entry!
+  createUser(data: UserCreateInput!): User!
+  createCategory(data: CategoryCreateInput!): Category!
   createAccount(data: AccountCreateInput!): Account!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateSheet(data: SheetUpdateInput!, where: SheetWhereUniqueInput!): Sheet
-  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   updateInstallmentEntry(data: InstallmentEntryUpdateInput!, where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
   updateEntry(data: EntryUpdateInput!, where: EntryWhereUniqueInput!): Entry
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   updateAccount(data: AccountUpdateInput!, where: AccountWhereUniqueInput!): Account
   deletePost(where: PostWhereUniqueInput!): Post
-  deleteUser(where: UserWhereUniqueInput!): User
   deleteSheet(where: SheetWhereUniqueInput!): Sheet
-  deleteCategory(where: CategoryWhereUniqueInput!): Category
   deleteInstallmentEntry(where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
   deleteEntry(where: EntryWhereUniqueInput!): Entry
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
   deleteAccount(where: AccountWhereUniqueInput!): Account
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertSheet(where: SheetWhereUniqueInput!, create: SheetCreateInput!, update: SheetUpdateInput!): Sheet!
-  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   upsertInstallmentEntry(where: InstallmentEntryWhereUniqueInput!, create: InstallmentEntryCreateInput!, update: InstallmentEntryUpdateInput!): InstallmentEntry!
   upsertEntry(where: EntryWhereUniqueInput!, create: EntryCreateInput!, update: EntryUpdateInput!): Entry!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   upsertAccount(where: AccountWhereUniqueInput!, create: AccountCreateInput!, update: AccountUpdateInput!): Account!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManySheets(data: SheetUpdateInput!, where: SheetWhereInput): BatchPayload!
-  updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
   updateManyInstallmentEntries(data: InstallmentEntryUpdateInput!, where: InstallmentEntryWhereInput): BatchPayload!
   updateManyEntries(data: EntryUpdateInput!, where: EntryWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
   updateManyAccounts(data: AccountUpdateInput!, where: AccountWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManySheets(where: SheetWhereInput): BatchPayload!
-  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
   deleteManyInstallmentEntries(where: InstallmentEntryWhereInput): BatchPayload!
   deleteManyEntries(where: EntryWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
   deleteManyAccounts(where: AccountWhereInput): BatchPayload!
 }
 
@@ -1790,25 +1919,25 @@ input PostWhereUniqueInput {
 
 type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   sheets(where: SheetWhereInput, orderBy: SheetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sheet]!
-  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   installmentEntries(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [InstallmentEntry]!
   entries(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Entry]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   accounts(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Account]!
   post(where: PostWhereUniqueInput!): Post
-  user(where: UserWhereUniqueInput!): User
   sheet(where: SheetWhereUniqueInput!): Sheet
-  category(where: CategoryWhereUniqueInput!): Category
   installmentEntry(where: InstallmentEntryWhereUniqueInput!): InstallmentEntry
   entry(where: EntryWhereUniqueInput!): Entry
+  user(where: UserWhereUniqueInput!): User
+  category(where: CategoryWhereUniqueInput!): Category
   account(where: AccountWhereUniqueInput!): Account
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   sheetsConnection(where: SheetWhereInput, orderBy: SheetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SheetConnection!
-  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
   installmentEntriesConnection(where: InstallmentEntryWhereInput, orderBy: InstallmentEntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InstallmentEntryConnection!
   entriesConnection(where: EntryWhereInput, orderBy: EntryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EntryConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
   accountsConnection(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccountConnection!
 
   """Fetches an object given its ID"""
@@ -2210,11 +2339,11 @@ input SheetWhereUniqueInput {
 
 type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   sheet(where: SheetSubscriptionWhereInput): SheetSubscriptionPayload
-  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
   installmentEntry(where: InstallmentEntrySubscriptionWhereInput): InstallmentEntrySubscriptionPayload
   entry(where: EntrySubscriptionWhereInput): EntrySubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
   account(where: AccountSubscriptionWhereInput): AccountSubscriptionPayload
 }
 
@@ -2554,6 +2683,12 @@ input UserWhereInput {
   sheets_every: SheetWhereInput
   sheets_some: SheetWhereInput
   sheets_none: SheetWhereInput
+  _MagicalBackRelation_PostToUser_every: PostWhereInput
+  _MagicalBackRelation_PostToUser_some: PostWhereInput
+  _MagicalBackRelation_PostToUser_none: PostWhereInput
+  _MagicalBackRelation_EntryToUser_every: EntryWhereInput
+  _MagicalBackRelation_EntryToUser_some: EntryWhereInput
+  _MagicalBackRelation_EntryToUser_none: EntryWhereInput
 }
 
 input UserWhereUniqueInput {

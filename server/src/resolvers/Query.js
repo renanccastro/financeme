@@ -75,6 +75,12 @@ const Query = {
       info
     );
   },
+  allCategories(parent, _, ctx, info) {
+    ctx.db.query.categories({}, info);
+  },
+  allAccounts(parent, _, ctx, info) {
+    return ctx.db.query.accounts({}, info);
+  },
 };
 
 module.exports = { Query };

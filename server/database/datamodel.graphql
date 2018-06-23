@@ -35,7 +35,7 @@ type Category {
 type InstallmentEntry {
   id: ID! @unique
   key: ID @unique
-  value: Json!
+  value: String!
   account: Account!
   sheet: Sheet! @relation(name: "InstallmentSheet")
   category: Category!
@@ -43,7 +43,7 @@ type InstallmentEntry {
 type Entry {
   id: ID! @unique
   key: ID @unique
-  value: Json!
+  value: String!
   budget: Boolean! @default(value: "false")
   updatedAt: DateTime!
   createdAt: DateTime!
@@ -60,7 +60,7 @@ type Entry {
 type Account {
   id: ID! @unique
   key: ID @unique
-  balance: Json!
+  balance: String!
   updatedAt: DateTime!
   createdAt: DateTime!
   creditCard: Boolean! @default(value: "false")
